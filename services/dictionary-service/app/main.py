@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from app import models, crud, schemas
@@ -7,6 +8,15 @@ from app.db import SessionLocal, engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Quanqua Dictionary Service")
+
+# CORS middleware → required for frontend calls
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Dependency
 def get_db():
