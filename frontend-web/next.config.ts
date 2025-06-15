@@ -1,9 +1,11 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export', // Enables static HTML export
   experimental: {
     turbo: {
-      loaders: {}, // optional — leave it empty → disables Turbopack cleanly
+      loaders: {}, // Disable Turbopack (fixes dev/build compatibility)
     },
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;
